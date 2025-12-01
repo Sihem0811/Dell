@@ -51,13 +51,6 @@
 		</dependency> 
 
 
-
-  	<dependency>
-  		<groupId>Orange</groupId>
-  		<artifactId>Orange</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  	
   	
   </dependencies>
   

@@ -15,11 +15,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import Helper.Config;
 
 public class DellHome {
-	@FindBy(xpath="/html/body/div[1]/header/section/header/div[2]/div[2]/nav/ul/li/button/span")
+	@FindBy(xpath="/html/body/div[2]/header/section/header/div[2]/div[2]/nav/ul/li/ul")
+		
 	List<WebElement> menus;
 
 
-	@FindBy(xpath="	/html/body/div[1]/header/section/header/div[2]/div[2]/nav/ul/li[3]/ul/li/button")
+	@FindBy(xpath="	/html/body/div[2]/header/section/header/div[2]/div[2]/nav/ul/li[3]/ul/li/a")	
+
 	List<WebElement> submenus;
 
 
@@ -89,8 +91,9 @@ try {
 		}
 		}catch (Exception e) {
 			// TODO: handle exception
+		} 
 		}
-	} 
+	
 	public void verifProduct (String produitName) {
 		Assert.assertEquals(produitName,verifpage.getText());
 	}
