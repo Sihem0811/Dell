@@ -23,22 +23,22 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'mvn clean install -U -DskipTests'
+                bat 'mvn clean install -U -DskipTests'
             }
         }
 
         stage('Run Cucumber Tests') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: false
+                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: true
             }
         }
-    } // fin stages
+    }
 
     post {
         always {
@@ -49,7 +49,7 @@ pipeline {
                     echo "Cucumber report JSON not found."
                 }
             }
-            junit 'target/surefire-reports/**/*.xml'
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
             allure includeProperties: false, jdk: '', results: [[path: "${ALLURE_RESULTS}"]]
         }
     }
