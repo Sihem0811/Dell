@@ -44,10 +44,10 @@ pipeline {
       //      steps {
       //          allure includeProperties: false, jdk: '', results: [[path: "${ALLURE_RESULTS}"]]
       //      }
-     //   }
-  //  }
+      //   }
+      //  }
 
-    post {
+          post {
     always {
         script {
             if (fileExists(CUCUMBER_JSON)) {
