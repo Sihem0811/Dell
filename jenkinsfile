@@ -16,7 +16,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM',
                     branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: '']]
+                    userRemoteConfigs: [[url: 'https://github.com/Sihem0811/Dell.git']]
                 ])
             }
         }
@@ -36,16 +36,16 @@ pipeline {
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}, ${ALLURE_RESULTS}/**", allowEmptyArchive: false
+                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}, $/**", allowEmptyArchive: false
             }
         }
 
-        stage('Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: "${ALLURE_RESULTS}"]]
-            }
-        }
-    }
+      //  stage('Allure Report') {
+      //      steps {
+      //          allure includeProperties: false, jdk: '', results: [[path: "${ALLURE_RESULTS}"]]
+      //      }
+     //   }
+  //  }
 
     post {
     always {
