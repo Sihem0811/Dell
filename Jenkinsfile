@@ -38,7 +38,7 @@ pipeline {
                 archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: false
             }
         }
-    } // ← fin des stages
+    } // fin stages
 
     post {
         always {
