@@ -6,17 +6,17 @@ pipeline {
     }
 
     environment {
-        CUCUMBER_JSON = 'target/cucumber-report.json'
+        CUCUMBER_JSON = 'target/cucumber.json'
         CUCUMBER_HTML = 'target/cucumber-report.html'
-        ALLURE_RESULTS = 'target/allure-results'
+        
     }
 
     stages {
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
-                    branches: [[name: '*/wafa']],
-                    userRemoteConfigs: [[url: 'git@github.com:proservices-tc/square-test-auto.git']]
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: '']]
                 ])
             }
         }
