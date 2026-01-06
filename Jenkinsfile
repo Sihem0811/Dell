@@ -53,3 +53,4 @@ pipeline {
             allure includeProperties: false, jdk: '', results: [[path: "${ALLURE_RESULTS}"]]
         }
     }
+}
