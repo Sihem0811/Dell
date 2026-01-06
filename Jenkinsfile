@@ -8,7 +8,7 @@ pipeline {
     environment {
         CUCUMBER_JSON = 'target/cucumber.json'
         CUCUMBER_HTML = 'target/cucumber-report.html'
-        ALLURE_RESULTS = 'target/allure-results' // ajouté pour Allure
+        ALLURE_RESULTS = 'target/allure-results'
     }
 
     stages {
@@ -38,7 +38,7 @@ pipeline {
                 archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: false
             }
         }
-    } // ← fin du bloc stages
+    } // fin des stages
 
     post {
         always {
@@ -49,28 +49,7 @@ pipeline {
                     echo "Cucumber report JSON not found."
                 }
             }
-            // Publish JUnit test result reports
             junit 'target/surefire-reports/**/*.xml'
-
-            // Publish Allure report
             allure includeProperties: false, jdk: '', results: [[path: "${ALLURE_RESULTS}"]]
         }
     }
-}
-
-    post {
-    always {
-        script {
-            catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                cucumber(
-                    jsonReportDirectory: 'target',
-                    fileIncludePattern: '**/cucumber.json'
-                )
-            }
-        }
-
-        junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
-    }
-}
-
-}
