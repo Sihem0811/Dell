@@ -57,3 +57,20 @@ pipeline {
         }
     }
 }
+
+    post {
+    always {
+        script {
+            catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                cucumber(
+                    jsonReportDirectory: 'target',
+                    fileIncludePattern: '**/cucumber.json'
+                )
+            }
+        }
+
+        junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
+    }
+}
+
+}
